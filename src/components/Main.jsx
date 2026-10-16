@@ -1,18 +1,26 @@
-import { Button, Carousel } from 'react-bootstrap';
+import { Button, Carousel, Table } from 'react-bootstrap';
 import ieMaca from '../assets/iemaca.avif';
+import { useState } from 'react';
 
 const Main = () => {
-  let instituicoesEnsino = [
+  let nome = 'Maria';
+
+  let [incremento, setIncremento] = useState(0);
+
+  let [instituicoesEnsino, setInstituicoesEnsino] = useState([
     { nome: 'IFPB - Guarabira' },
     { nome: 'IFPB - Cajazeiras' },
-  ];
-  let nome = 'Maria';
-  let incremento = 0;
+  ]);
 
-  const handleClick = (event) => {
-    console.log('Clicou no botão');
-    incremento = incremento + 1;
-    console.log(incremento);
+  const handleClickIncrementar = (event) => {
+    setIncremento(incremento + 1);
+  };
+
+  const handleClickAdicionarIE = (event) => {
+    console.log('Adionando uma IE');
+    let instituicaoEnsino = { nome: 'IFPB - Campina Grande' };
+    // instituicoesEnsino.push(instituicaoEnsino);
+    setInstituicoesEnsino([...instituicoesEnsino, instituicaoEnsino]);
   };
 
   const handleMouseOver = (event) => {
@@ -36,9 +44,28 @@ const Main = () => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel> */}
-      1 + 1={1 + 1}
       <p>{incremento}</p>
       <p>{nome}</p>
+
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+          </tr>
+        </thead>
+        <tbody>
+          {instituicoesEnsino.map((instituicaoEnsino, i) => {
+            return (
+              <tr key={i}>
+                <td>{i + 1}</td>
+                <td>{instituicaoEnsino.nome}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+
       <ul>
         {instituicoesEnsino.map((instituicaoEnsino, i) => {
           return <li key={i}>{instituicaoEnsino.nome}</li>;
@@ -46,11 +73,19 @@ const Main = () => {
       </ul>
       {}
       <Button
-        onClick={handleClick}
+        onClick={handleClickIncrementar}
         onMouseOver={handleMouseOver}
         variant="primary"
       >
-        Enviar
+        Incrementar
+      </Button>
+
+      <Button
+        onClick={handleClickAdicionarIE}
+        variant="primary"
+        className="ms-2"
+      >
+        Adicionar Instituição
       </Button>
     </>
   );
