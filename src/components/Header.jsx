@@ -2,6 +2,8 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { FaSchool } from 'react-icons/fa';
 
 import { HeartIcon } from '@phosphor-icons/react';
+import { Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const Header = () => {
   return (
@@ -15,12 +17,22 @@ const Header = () => {
           <Navbar.Toggle aria-controls="header-navbar" />
           <Navbar.Collapse id="header-navbar">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Instituições Ensino</Nav.Link>
+              <LinkContainer to="/">
+                <Nav.Link>Home</Nav.Link>
+              </LinkContainer>
+
+              <LinkContainer to="/instituicoesensino">
+                <Nav.Link>Instituições Ensino</Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      <nav>
+        <Link to="/">Home</Link> |{' '}
+        <Link to="/instituicoesensino">Instituições Ensino</Link> |{' '}
+      </nav>
     </header>
   );
 };
